@@ -1,5 +1,7 @@
 ---
+const { post } = Astro.props;
+const content = post.compiledContent()
 ---
 <div>
-    <p>Content</p>
+    <Fragment set:html={content}/>
 </div>
