@@ -18,9 +18,9 @@ var config_default = defineConfig({
   schema: {
     collections: [
       {
-        name: "post",
-        label: "Posts",
-        path: "content/posts",
+        name: "tweet",
+        label: "Tweets",
+        path: "content/tweets",
         fields: [
           {
             type: "string",

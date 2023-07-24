@@ -1,0 +1,8 @@
+---
+const { tweet } = Astro.props;
+const content = tweet.compiledContent()
+---
+
+<div>
+    <Fragment set:html={content}/>
+</div>

@@ -53,12 +53,12 @@ type Query {
   collections: [Collection!]!
   node(id: String): Node!
   document(collection: String, relativePath: String): DocumentNode!
-  post(relativePath: String): Post!
-  postConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PostFilter): PostConnection!
+  tweet(relativePath: String): Tweet!
+  tweetConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TweetFilter): TweetConnection!
 }
 
 input DocumentFilter {
-  post: PostFilter
+  tweet: TweetFilter
 }
 
 type DocumentConnectionEdges {
@@ -84,9 +84,9 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Post | Folder
+union DocumentNode = Tweet | Folder
 
-type Post implements Node & Document {
+type Tweet implements Node & Document {
   title: String!
   body: JSON
   id: ID!
@@ -107,20 +107,20 @@ input RichTextFilter {
   exists: Boolean
 }
 
-input PostFilter {
+input TweetFilter {
   title: StringFilter
   body: RichTextFilter
 }
 
-type PostConnectionEdges {
+type TweetConnectionEdges {
   cursor: String!
-  node: Post
+  node: Tweet
 }
 
-type PostConnection implements Connection {
+type TweetConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
-  edges: [PostConnectionEdges]
+  edges: [TweetConnectionEdges]
 }
 
 type Mutation {
@@ -128,20 +128,20 @@ type Mutation {
   updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
   deleteDocument(collection: String, relativePath: String!): DocumentNode!
   createDocument(collection: String, relativePath: String!, params: DocumentMutation!): DocumentNode!
-  updatePost(relativePath: String!, params: PostMutation!): Post!
-  createPost(relativePath: String!, params: PostMutation!): Post!
+  updateTweet(relativePath: String!, params: TweetMutation!): Tweet!
+  createTweet(relativePath: String!, params: TweetMutation!): Tweet!
 }
 
 input DocumentUpdateMutation {
-  post: PostMutation
+  tweet: TweetMutation
   relativePath: String
 }
 
 input DocumentMutation {
-  post: PostMutation
+  tweet: TweetMutation
 }
 
-input PostMutation {
+input TweetMutation {
   title: String
   body: JSON
 }

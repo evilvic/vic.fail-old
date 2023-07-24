@@ -81,8 +81,8 @@ export type Query = {
   collections: Array<Collection>;
   node: Node;
   document: DocumentNode;
-  post: Post;
-  postConnection: PostConnection;
+  tweet: Tweet;
+  tweetConnection: TweetConnection;
 };
 
 
@@ -107,22 +107,22 @@ export type QueryDocumentArgs = {
 };
 
 
-export type QueryPostArgs = {
+export type QueryTweetArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type QueryPostConnectionArgs = {
+export type QueryTweetConnectionArgs = {
   before?: InputMaybe<Scalars['String']['input']>;
   after?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Float']['input']>;
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<PostFilter>;
+  filter?: InputMaybe<TweetFilter>;
 };
 
 export type DocumentFilter = {
-  post?: InputMaybe<PostFilter>;
+  tweet?: InputMaybe<TweetFilter>;
 };
 
 export type DocumentConnectionEdges = {
@@ -162,10 +162,10 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Post | Folder;
+export type DocumentNode = Tweet | Folder;
 
-export type Post = Node & Document & {
-  __typename?: 'Post';
+export type Tweet = Node & Document & {
+  __typename?: 'Tweet';
   title: Scalars['String']['output'];
   body?: Maybe<Scalars['JSON']['output']>;
   id: Scalars['ID']['output'];
@@ -186,22 +186,22 @@ export type RichTextFilter = {
   exists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-export type PostFilter = {
+export type TweetFilter = {
   title?: InputMaybe<StringFilter>;
   body?: InputMaybe<RichTextFilter>;
 };
 
-export type PostConnectionEdges = {
-  __typename?: 'PostConnectionEdges';
+export type TweetConnectionEdges = {
+  __typename?: 'TweetConnectionEdges';
   cursor: Scalars['String']['output'];
-  node?: Maybe<Post>;
+  node?: Maybe<Tweet>;
 };
 
-export type PostConnection = Connection & {
-  __typename?: 'PostConnection';
+export type TweetConnection = Connection & {
+  __typename?: 'TweetConnection';
   pageInfo: PageInfo;
   totalCount: Scalars['Float']['output'];
-  edges?: Maybe<Array<Maybe<PostConnectionEdges>>>;
+  edges?: Maybe<Array<Maybe<TweetConnectionEdges>>>;
 };
 
 export type Mutation = {
@@ -210,8 +210,8 @@ export type Mutation = {
   updateDocument: DocumentNode;
   deleteDocument: DocumentNode;
   createDocument: DocumentNode;
-  updatePost: Post;
-  createPost: Post;
+  updateTweet: Tweet;
+  createTweet: Tweet;
 };
 
 
@@ -242,61 +242,61 @@ export type MutationCreateDocumentArgs = {
 };
 
 
-export type MutationUpdatePostArgs = {
+export type MutationUpdateTweetArgs = {
   relativePath: Scalars['String']['input'];
-  params: PostMutation;
+  params: TweetMutation;
 };
 
 
-export type MutationCreatePostArgs = {
+export type MutationCreateTweetArgs = {
   relativePath: Scalars['String']['input'];
-  params: PostMutation;
+  params: TweetMutation;
 };
 
 export type DocumentUpdateMutation = {
-  post?: InputMaybe<PostMutation>;
+  tweet?: InputMaybe<TweetMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DocumentMutation = {
-  post?: InputMaybe<PostMutation>;
+  tweet?: InputMaybe<TweetMutation>;
 };
 
-export type PostMutation = {
+export type TweetMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type PostPartsFragment = { __typename?: 'Post', title: string, body?: any | null };
+export type TweetPartsFragment = { __typename?: 'Tweet', title: string, body?: any | null };
 
-export type PostQueryVariables = Exact<{
+export type TweetQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type PostQuery = { __typename?: 'Query', post: { __typename?: 'Post', id: string, title: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type TweetQuery = { __typename?: 'Query', tweet: { __typename?: 'Tweet', id: string, title: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
-export type PostConnectionQueryVariables = Exact<{
+export type TweetConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
   after?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Float']['input']>;
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<PostFilter>;
+  filter?: InputMaybe<TweetFilter>;
 }>;
 
 
-export type PostConnectionQuery = { __typename?: 'Query', postConnection: { __typename?: 'PostConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PostConnectionEdges', cursor: string, node?: { __typename?: 'Post', id: string, title: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type TweetConnectionQuery = { __typename?: 'Query', tweetConnection: { __typename?: 'TweetConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'TweetConnectionEdges', cursor: string, node?: { __typename?: 'Tweet', id: string, title: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
-export const PostPartsFragmentDoc = gql`
-    fragment PostParts on Post {
+export const TweetPartsFragmentDoc = gql`
+    fragment TweetParts on Tweet {
   title
   body
 }
     `;
-export const PostDocument = gql`
-    query post($relativePath: String!) {
-  post(relativePath: $relativePath) {
+export const TweetDocument = gql`
+    query tweet($relativePath: String!) {
+  tweet(relativePath: $relativePath) {
     ... on Document {
       _sys {
         filename
@@ -308,13 +308,13 @@ export const PostDocument = gql`
       }
       id
     }
-    ...PostParts
+    ...TweetParts
   }
 }
-    ${PostPartsFragmentDoc}`;
-export const PostConnectionDocument = gql`
-    query postConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PostFilter) {
-  postConnection(
+    ${TweetPartsFragmentDoc}`;
+export const TweetConnectionDocument = gql`
+    query tweetConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: TweetFilter) {
+  tweetConnection(
     before: $before
     after: $after
     first: $first
@@ -343,20 +343,20 @@ export const PostConnectionDocument = gql`
           }
           id
         }
-        ...PostParts
+        ...TweetParts
       }
     }
   }
 }
-    ${PostPartsFragmentDoc}`;
+    ${TweetPartsFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
-      post(variables: PostQueryVariables, options?: C): Promise<{data: PostQuery, variables: PostQueryVariables, query: string}> {
-        return requester<{data: PostQuery, variables: PostQueryVariables, query: string}, PostQueryVariables>(PostDocument, variables, options);
+      tweet(variables: TweetQueryVariables, options?: C): Promise<{data: TweetQuery, variables: TweetQueryVariables, query: string}> {
+        return requester<{data: TweetQuery, variables: TweetQueryVariables, query: string}, TweetQueryVariables>(TweetDocument, variables, options);
       },
-    postConnection(variables?: PostConnectionQueryVariables, options?: C): Promise<{data: PostConnectionQuery, variables: PostConnectionQueryVariables, query: string}> {
-        return requester<{data: PostConnectionQuery, variables: PostConnectionQueryVariables, query: string}, PostConnectionQueryVariables>(PostConnectionDocument, variables, options);
+    tweetConnection(variables?: TweetConnectionQueryVariables, options?: C): Promise<{data: TweetConnectionQuery, variables: TweetConnectionQueryVariables, query: string}> {
+        return requester<{data: TweetConnectionQuery, variables: TweetConnectionQueryVariables, query: string}, TweetConnectionQueryVariables>(TweetConnectionDocument, variables, options);
       }
     };
   }

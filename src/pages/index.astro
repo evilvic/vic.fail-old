@@ -2,7 +2,7 @@
 import '../styles/global.css';
 
 import Header from '../components/Header.astro';
-import Post from '../components/Post.astro';
+import Tweet from '../components/Tweet.astro';
 
 const siteTitle = "vic.fail";
 const identity = {
@@ -12,7 +12,7 @@ const identity = {
 	country: "México",
 };
 
-const allPosts = await Astro.glob("../../content/posts/*.md");
+const allTweets = await Astro.glob("../../content/tweets/*.md");
 ---
 
 <html lang="en">
@@ -29,8 +29,8 @@ const allPosts = await Astro.glob("../../content/posts/*.md");
 			identity={identity}
 		/>
 		<ul>
-			{allPosts.map((post) => (
-				<li><Post post={post} content={post.compiledContent()}/></li>
+			{allTweets.map((tweet) => (
+				<li><Tweet tweet={tweet} content={tweet.compiledContent()}/></li>
 			))}
 		</ul>
 	</body>

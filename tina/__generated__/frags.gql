@@ -1,4 +1,4 @@
-fragment PostParts on Post {
+fragment TweetParts on Tweet {
   title
   body
 }

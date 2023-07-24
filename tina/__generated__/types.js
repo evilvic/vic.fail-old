@@ -5,15 +5,15 @@ export function gql(strings, ...args) {
   });
   return str;
 }
-export const PostPartsFragmentDoc = gql`
-    fragment PostParts on Post {
+export const TweetPartsFragmentDoc = gql`
+    fragment TweetParts on Tweet {
   title
   body
 }
     `;
-export const PostDocument = gql`
-    query post($relativePath: String!) {
-  post(relativePath: $relativePath) {
+export const TweetDocument = gql`
+    query tweet($relativePath: String!) {
+  tweet(relativePath: $relativePath) {
     ... on Document {
       _sys {
         filename
@@ -25,13 +25,13 @@ export const PostDocument = gql`
       }
       id
     }
-    ...PostParts
+    ...TweetParts
   }
 }
-    ${PostPartsFragmentDoc}`;
-export const PostConnectionDocument = gql`
-    query postConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PostFilter) {
-  postConnection(
+    ${TweetPartsFragmentDoc}`;
+export const TweetConnectionDocument = gql`
+    query tweetConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: TweetFilter) {
+  tweetConnection(
     before: $before
     after: $after
     first: $first
@@ -60,19 +60,19 @@ export const PostConnectionDocument = gql`
           }
           id
         }
-        ...PostParts
+        ...TweetParts
       }
     }
   }
 }
-    ${PostPartsFragmentDoc}`;
+    ${TweetPartsFragmentDoc}`;
 export function getSdk(requester) {
   return {
-    post(variables, options) {
-      return requester(PostDocument, variables, options);
+    tweet(variables, options) {
+      return requester(TweetDocument, variables, options);
     },
-    postConnection(variables, options) {
-      return requester(PostConnectionDocument, variables, options);
+    tweetConnection(variables, options) {
+      return requester(TweetConnectionDocument, variables, options);
     }
   };
 }
