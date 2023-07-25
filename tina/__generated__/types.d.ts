@@ -167,6 +167,7 @@ export type DocumentNode = Tweet | Folder;
 export type Tweet = Node & Document & {
   __typename?: 'Tweet';
   title: Scalars['String']['output'];
+  date?: Maybe<Scalars['String']['output']>;
   body?: Maybe<Scalars['JSON']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
@@ -180,6 +181,14 @@ export type StringFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type DatetimeFilter = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
 export type RichTextFilter = {
   startsWith?: InputMaybe<Scalars['String']['input']>;
   eq?: InputMaybe<Scalars['String']['input']>;
@@ -188,6 +197,7 @@ export type RichTextFilter = {
 
 export type TweetFilter = {
   title?: InputMaybe<StringFilter>;
+  date?: InputMaybe<DatetimeFilter>;
   body?: InputMaybe<RichTextFilter>;
 };
 
@@ -264,17 +274,18 @@ export type DocumentMutation = {
 
 export type TweetMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
+  date?: InputMaybe<Scalars['String']['input']>;
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type TweetPartsFragment = { __typename?: 'Tweet', title: string, body?: any | null };
+export type TweetPartsFragment = { __typename?: 'Tweet', title: string, date?: string | null, body?: any | null };
 
 export type TweetQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type TweetQuery = { __typename?: 'Query', tweet: { __typename?: 'Tweet', id: string, title: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type TweetQuery = { __typename?: 'Query', tweet: { __typename?: 'Tweet', id: string, title: string, date?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type TweetConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -286,11 +297,12 @@ export type TweetConnectionQueryVariables = Exact<{
 }>;
 
 
-export type TweetConnectionQuery = { __typename?: 'Query', tweetConnection: { __typename?: 'TweetConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'TweetConnectionEdges', cursor: string, node?: { __typename?: 'Tweet', id: string, title: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type TweetConnectionQuery = { __typename?: 'Query', tweetConnection: { __typename?: 'TweetConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'TweetConnectionEdges', cursor: string, node?: { __typename?: 'Tweet', id: string, title: string, date?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export const TweetPartsFragmentDoc = gql`
     fragment TweetParts on Tweet {
   title
+  date
   body
 }
     `;

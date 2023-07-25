@@ -25,6 +25,7 @@ const { siteTitle, identity } = Astro.props;
 
 <style>
     .header {
+        overflow: hidden;
         .top-imgs {
             background-image: url("/assets/top_img.jpeg");
             background-size: cover;
@@ -45,8 +46,6 @@ const { siteTitle, identity } = Astro.props;
             flex-direction: column-reverse;
             padding: 40px 16px 0;
             .site-title {
-                font-size: 15px;
-                font-weight: 400;
                 color: gray;
             }
             .full-name {

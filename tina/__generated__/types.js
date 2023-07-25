@@ -8,6 +8,7 @@ export function gql(strings, ...args) {
 export const TweetPartsFragmentDoc = gql`
     fragment TweetParts on Tweet {
   title
+  date
   body
 }
     `;

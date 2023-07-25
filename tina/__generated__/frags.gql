@@ -1,4 +1,5 @@
 fragment TweetParts on Tweet {
   title
+  date
   body
 }

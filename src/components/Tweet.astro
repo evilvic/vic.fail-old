@@ -3,6 +3,14 @@ const { tweet } = Astro.props;
 const content = tweet.compiledContent()
 ---
 
-<div>
+<div class="tweet">
     <Fragment set:html={content}/>
+    <p>{tweet.frontmatter.date}</p>
 </div>
+
+<style>
+    .tweet {
+        padding: 16px;
+        border-bottom: 1px solid gray;
+    }
+</style>

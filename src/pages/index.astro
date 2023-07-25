@@ -12,7 +12,12 @@ const identity = {
 	country: "México",
 };
 
-const allTweets = await Astro.glob("../../content/tweets/*.md");
+const allTweets = await Astro.glob("../content/tweets/*.md");
+const parsedTweets = allTweets.map((tweet) => ({
+	...tweet,
+	date: new Date(tweet.frontmatter.date),
+}));
+const sortedTweets = parsedTweets.sort((a, b) => b.date - a.date);
 ---
 
 <html lang="en">
@@ -28,10 +33,18 @@ const allTweets = await Astro.glob("../../content/tweets/*.md");
 			siteTitle={siteTitle}
 			identity={identity}
 		/>
-		<ul>
-			{allTweets.map((tweet) => (
-				<li><Tweet tweet={tweet} content={tweet.compiledContent()}/></li>
+		<ul class="nest">
+			{sortedTweets.map((tweet) => (
+				<li><Tweet tweet={tweet}/></li>
 			))}
 		</ul>
 	</body>
 </html>
+
+<style>
+	.nest {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+	}
+</style>

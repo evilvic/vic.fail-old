@@ -20,7 +20,7 @@ var config_default = defineConfig({
       {
         name: "tweet",
         label: "Tweets",
-        path: "content/tweets",
+        path: "src/content/tweets",
         fields: [
           {
             type: "string",
@@ -28,6 +28,14 @@ var config_default = defineConfig({
             label: "Title",
             isTitle: true,
             required: true
+          },
+          {
+            type: "datetime",
+            name: "date",
+            label: "Date",
+            ui: {
+              timeFormat: "HH:mm"
+            }
           },
           {
             type: "rich-text",

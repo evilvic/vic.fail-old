@@ -88,6 +88,7 @@ union DocumentNode = Tweet | Folder
 
 type Tweet implements Node & Document {
   title: String!
+  date: String
   body: JSON
   id: ID!
   _sys: SystemInfo!
@@ -101,6 +102,14 @@ input StringFilter {
   in: [String]
 }
 
+input DatetimeFilter {
+  after: String
+  before: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
 input RichTextFilter {
   startsWith: String
   eq: String
@@ -109,6 +118,7 @@ input RichTextFilter {
 
 input TweetFilter {
   title: StringFilter
+  date: DatetimeFilter
   body: RichTextFilter
 }
 
@@ -143,6 +153,7 @@ input DocumentMutation {
 
 input TweetMutation {
   title: String
+  date: String
   body: JSON
 }
 
